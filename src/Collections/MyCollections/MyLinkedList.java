@@ -1,4 +1,4 @@
-package Collections.List;
+package Collections.MyCollections;
 
 import java.util.NoSuchElementException;
 
@@ -23,7 +23,7 @@ public class MyLinkedList<E>{
         if(index < 0 || index > size) throw new IndexOutOfBoundsException();
         ListNode<E> node = new ListNode<E>(elem);
 
-        if(index == 0){// addfirst
+        if(index == 0){// add First
             if(first == null){
                 first = last = node;
             }

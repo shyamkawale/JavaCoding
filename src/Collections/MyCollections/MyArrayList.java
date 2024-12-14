@@ -1,4 +1,4 @@
-package Collections.List;
+package Collections.MyCollections;
 
 import java.util.Arrays;
 import java.util.Collection;

@@ -10,6 +10,7 @@ import java.util.Stack;
 import java.util.Vector;
 
 public class CollectionMain {
+    @SuppressWarnings("unused")
     public static void main(String[] args) {
         // Types of List
         ArrayList<Integer> list = new ArrayList<Integer>(); // implementation in MyArrayList.java
@@ -36,9 +37,23 @@ public class CollectionMain {
         int dpopped = dStack.pop(); // Pop the top element (20)
 
         // Types of Queues
-        Queue<Integer> lQueue = new LinkedList<Integer>();
-        Queue<Integer> aQueue = new ArrayDeque<Integer>();
-        Queue<Integer> pQueue = new PriorityQueue<Integer>();
+        Queue<Integer> lQueue = new LinkedList<Integer>(); //uses doubly linked list
+        lQueue.offer(10);
+        lQueue.offer(20);
+        int lfront = lQueue.peek();
+        int lpolled = lQueue.poll();
+
+        Queue<Integer> aQueue = new ArrayDeque<Integer>(); //uses circular array
+        aQueue.offer(10);
+        aQueue.offer(20);
+        int afront = aQueue.peek();
+        int apolled = aQueue.poll();
+
+        Queue<Integer> pQueue = new PriorityQueue<Integer>(); // default is minHeap
+        pQueue.offer(10);
+        pQueue.offer(20);
+        int pQfront = pQueue.peek();
+        int pQpolled = pQueue.poll();
 
     }
 }
