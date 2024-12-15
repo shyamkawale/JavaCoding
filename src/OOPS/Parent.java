@@ -1,25 +1,20 @@
 package OOPS;
 
 public class Parent {
-    public String Name;
-    public String SurName;
-    public String HusbandName;
-    public int Age;
+    public String commonProp;
+    public String parentProp;
 
-    public Parent(){ };
-    public Parent(String name, String surName, int age){
-        this.Name = name;
-        this.SurName = surName;
-        this.Age = age;
+    public Parent(){
+        this.commonProp = "Parent_Common";
+        this.parentProp = "Parent_Pvt";
+    };
+
+    public void commonMethod(){
+        System.out.println("This is (Parent)'s commonMethod");
     }
 
-    public void getAddress(){
-        System.out.println("This is (Parent) " + this.Name +"'s Address");
+    public void parentMethod(){
+        System.out.println("This is (Parent)'s' parentMethod");
     }
-
-    public void getHusbandName(){
-        System.out.println("This is (Parent) " + this.Name + "'s Husband name");
-    }
-
 
 }

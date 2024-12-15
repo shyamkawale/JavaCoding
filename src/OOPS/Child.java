@@ -1,24 +1,19 @@
 package OOPS;
 
 public class Child extends Parent {
-    public String Name;
-    public String SurName = "Kawale";
-    public MaritalStatus MaritalStatus;
-    public int Age;
+    public String commonProp;
+    public String childProp;
 
+    public Child(){
+        this.commonProp = "Child_Common";
+        this.childProp = "Child_Pvt";
+    };
 
-    public Child(String name, String surName, int age, MaritalStatus maritalStatus){
-        super(name, surName, age);
-        this.Name = name;
-        this.Age = age;
-        this.MaritalStatus = maritalStatus;
+    public void commonMethod(){
+        System.out.println("This is (Child)'s commonMethod");
     }
 
-    public void getAddress(){
-        System.out.println("This is (Child) " + this.Name +"'s Address");
-    }
-
-    public void getSchoolName(){
-        System.out.println("This is (Child) " + this.Name +"'s SchoolName");
+    public void childMethod(){
+        System.out.println("This is (Child)'s' childMethod");
     }
 }
