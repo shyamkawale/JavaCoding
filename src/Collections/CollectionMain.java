@@ -55,5 +55,13 @@ public class CollectionMain {
         int pQfront = pQueue.peek();
         int pQpolled = pQueue.poll();
 
+        //Deque
+        Deque<Integer> deque = new ArrayDeque<Integer>();
+        deque.offerFirst(10);
+        deque.addLast(20);
+        int dQFront = deque.peekFirst();
+        int dQLast = deque.peekLast();
+        int dqFrontPolled = deque.pollFirst();
+        int dqLastPolled = deque.pollLast();
     }
 }

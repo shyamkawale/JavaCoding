@@ -1,34 +1,56 @@
 package Collections.MyCollections;
 
+import java.util.Arrays;
 import java.util.EmptyStackException;
-import java.util.Vector;
 
-public class MyStack<E> extends Vector<E>{
-    public MyStack(){} //no parametrized constructor
+@SuppressWarnings("unchecked")
+public class MyStack<E>{
+    private static final int DEFAULT_CAPACITY = 10;
+    private Object[] elements;
+    private int top = -1;
+
+    public MyStack(){
+        elements = new Object[DEFAULT_CAPACITY];
+    }
+
+    public MyStack(int initialCapacity){
+        if(initialCapacity < 0){
+            throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
+        }
+        elements = new Object[initialCapacity];
+    }
 
     public E peek(){
-        int len = size(); //vector's method
-        if (len == 0)
+        if (isEmpty()){
             throw new EmptyStackException();
-        return elementAt(len - 1); //vector's method
+        }
+        return (E) elements[top];
     }
 
     public E push(E item){
-        addElement(item); //vector's method => appends element in Object array(similar to add method of ArrayList)
+        ensureCapacity();
+        elements[++top] = item;
         return item;
     }
 
     public E pop(){
         E elem = peek();
-
-        int len = size(); //vector's method
-        removeElementAt(len - 1); //vector's method
-
+        elements[top--] = null;
         return elem;
     }
 
     public boolean isEmpty(){
-        int len = size(); //vector's method
-        return len == 0;
+        return top == -1;
+    }
+
+    public int size(){
+        return top+1;
+    }
+
+    private void ensureCapacity(){
+        if(top + 1 >= elements.length){
+            int newCapacity = 2 * elements.length;
+            elements = Arrays.copyOf(elements, newCapacity);
+        }
     }
 }

@@ -4,18 +4,18 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 @SuppressWarnings("unchecked")
-public class MyQueue<E> {
+public class MyDeque<E> {
     private static final int DEFAULT_CAPACITY = 10;
     private Object[] elements;
     private int start, end, size;
 
-    public MyQueue() {
+    public MyDeque() {
         elements = new Object[DEFAULT_CAPACITY];
         start = end = -1;
         size = 0;
     }
 
-    public MyQueue(int initialCapacity) {
+    public MyDeque(int initialCapacity) {
         if(initialCapacity < 0){
             throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
         }
@@ -24,7 +24,22 @@ public class MyQueue<E> {
         size = 0;
     }
 
-    public boolean offer(E elem){
+    public boolean addFirst(E elem){
+        if (elem == null) throw new NullPointerException("Null elements are not allowed");
+        ensureCapacity();
+        if(size == 0){
+            start = end = 0;
+        }
+        else{
+            start = (start - 1 + elements.length)%elements.length;
+        }
+
+        elements[start] = elem;
+        size++;
+        return true;
+    }
+
+    public boolean addLast(E elem){
         if (elem == null) throw new NullPointerException("Null elements are not allowed");
         ensureCapacity();
         if(size == 0){
@@ -33,24 +48,31 @@ public class MyQueue<E> {
         else{
             end = (end + 1)%elements.length;
         }
-        
+
         elements[end] = elem;
         size++;
         return true;
     }
 
-	public E peek(){
+	public E peekFirst(){
         if(size == 0){
             throw new NoSuchElementException("Queue is empty");
         }
         return (E) elements[start];
     }
 
-    public E poll(){
+    public E peekLast(){
         if(size == 0){
             throw new NoSuchElementException("Queue is empty");
         }
-        E peeked = (E) elements[start];
+        return (E) elements[end];
+    }
+
+    public E removeFirst(){
+        if(size == 0){
+            throw new NoSuchElementException("Queue is empty");
+        }
+        E startElem = (E) elements[start];
         elements[start] = null;
         if(size == 1){
             start = end = -1;
@@ -59,7 +81,23 @@ public class MyQueue<E> {
             start = (start + 1)%elements.length;
         }
         size--;
-        return peeked;
+        return startElem;
+    }
+
+    public E removeLast(){
+        if(size == 0){
+            throw new NoSuchElementException("Queue is empty");
+        }
+        E lastElem = (E) elements[end];
+        elements[end] = null;
+        if(size == 1){
+            start = end = -1;
+        }
+        else{
+            end = (end - 1 + elements.length)%elements.length;
+        }
+        size--;
+        return lastElem;
     }
 
     public boolean isEmpty() {
@@ -86,3 +124,4 @@ public class MyQueue<E> {
         }
     }
 }
+

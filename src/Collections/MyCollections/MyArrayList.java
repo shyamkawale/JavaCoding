@@ -7,7 +7,7 @@ import java.util.Set;
 
 @SuppressWarnings("unchecked")
 public class MyArrayList<E> {
-    private final int DEFAULT_CAPACITY = 10;
+    private static final int DEFAULT_CAPACITY = 10;
     private int size = 0;
     private Object[] elements;
 
@@ -15,12 +15,10 @@ public class MyArrayList<E> {
         elements = new Object[DEFAULT_CAPACITY];
     }
     public MyArrayList(int initialCapacity){
-        if(initialCapacity >= 0){
-            elements = new Object[initialCapacity];
-        }
-        else{
+        if(initialCapacity < 0){
             throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
         }
+        elements = new Object[initialCapacity];
     }
 
     public MyArrayList(Collection<? extends E> collection){
@@ -46,7 +44,7 @@ public class MyArrayList<E> {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
         E oldElement = (E) elements[index];
-        int numMoved = size - index - 1;
+        int numMoved = size-index-1;
         if (numMoved > 0) {
             System.arraycopy(elements, index + 1, elements, index, numMoved);
         }
@@ -61,19 +59,19 @@ public class MyArrayList<E> {
         return false;
     }
 
-    public void ensureCapacity(){
-        if(size >= elements.length){
-            int newCapacity = 2 * elements.length;
-            elements = Arrays.copyOf(elements, newCapacity);
-        }
-    }
-
     public int getSize() {
         return size;
     }
 
     public boolean isEmpty(){
         return size == 0;
+    }
+
+    private void ensureCapacity(){
+        if(size >= elements.length){
+            int newCapacity = 2 * elements.length;
+            elements = Arrays.copyOf(elements, newCapacity);
+        }
     }
 
     public static class Main{
