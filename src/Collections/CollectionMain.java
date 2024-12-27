@@ -2,12 +2,23 @@ package Collections;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Set;
 import java.util.Stack;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.Vector;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CollectionMain {
     @SuppressWarnings("unused")
@@ -63,5 +74,41 @@ public class CollectionMain {
         int dQLast = deque.peekLast();
         int dqFrontPolled = deque.pollFirst();
         int dqLastPolled = deque.pollLast();
+
+        // Types of Map
+        // HashMap
+        Map<Integer, String> hashMap = new HashMap<Integer, String>();
+        Set<Map.Entry<Integer, String>> entrySet = hashMap.entrySet();
+        Set<Integer> keySet = hashMap.keySet();
+        Collection<String> valuesCollection = hashMap.values();
+
+        // LinkedHashMap
+        Map<Integer, String> linkedHashMap = new LinkedHashMap<Integer, String>(); // HashMap + insertion order/ access order
+        Set<Map.Entry<Integer, String>> entryllSet = linkedHashMap.entrySet();
+        Set<Integer> keyllSet = linkedHashMap.keySet();
+        Collection<String> valuesllCollection = linkedHashMap.values();
+
+        // TreeMap
+        Map<Integer, String> treeMap = new TreeMap<Integer, String>(); // sorted order
+        Set<Map.Entry<Integer, String>> entrytreeSet = treeMap.entrySet();
+        Set<Integer> keytreeSet = treeMap.keySet();
+        Collection<String> valuestreeCollection = treeMap.values();
+
+        // Hashtable
+        Map<Integer, String> hashTable = new Hashtable<Integer, String>(); // HashMap + thread-safe
+        //ConcurrentHashMap
+        Map<Integer, String> concurrentHashMap = new ConcurrentHashMap<Integer, String>(); // HashMap + thread-safe(highly-concurrent implementation)
+
+
+        // Types of Set
+        // HashSet
+        Set<Integer> hashSet = new HashSet<Integer>();
+
+        // LinkedHashSet
+        Set<Integer> linkedHashSet = new LinkedHashSet<Integer>(); // insertion order
+
+        // TreeSet
+        Set<Integer> treeSet = new TreeSet<Integer>(); // sorted order
+
     }
 }
