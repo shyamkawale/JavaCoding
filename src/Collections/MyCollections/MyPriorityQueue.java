@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({ "unchecked", "unused" })
 public class MyPriorityQueue<E> {
     private static final int DEFAULT_CAPACITY = 10;
     private Object[] elements;
