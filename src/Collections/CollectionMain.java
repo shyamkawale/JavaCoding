@@ -3,6 +3,7 @@ package Collections;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -60,7 +61,13 @@ public class CollectionMain {
         int afront = aQueue.peek();
         int apolled = aQueue.poll();
 
-        Queue<Integer> pQueue = new PriorityQueue<Integer>(); // default is minHeap
+        class DescIntComparator implements Comparator<Integer>{
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
+        }
+        Queue<Integer> pQueue = new PriorityQueue<Integer>(new DescIntComparator()); // default is minHeap
         pQueue.offer(10);
         pQueue.offer(20);
         int pQfront = pQueue.peek();
@@ -109,6 +116,10 @@ public class CollectionMain {
 
         // TreeSet
         Set<Integer> treeSet = new TreeSet<Integer>(); // sorted order
+
+
+        // Comparable
+        // Comparator<E>
 
     }
 }
