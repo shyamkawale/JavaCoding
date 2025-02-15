@@ -1,14 +1,14 @@
 # Annotation
 
-What is Annotation?
+## What is Annotation?
 
 - It is kind of adding META DATA to the java code.
 - Means, its usage is OPTIONAL.
 - We can use this meta data information at runtime and can add certain logic in our code if wanted.
-- How to Read Meta data information? Using Reflection as discussed in previous video.
-- Annotations can be applied at anywhere like Classes, Methods, Interface, fields, parameters etc.
+- How to Read Meta data information? => Using Reflection
+- Annotations can be applied at anywhere like Classes, Methods, Interface, Fields, parameters etc.
 
-Types of Annotation:
+## Types of Annotation
 
 1. Custom Defined(user defined)
 2. Pre-Defined
@@ -25,9 +25,9 @@ Types of Annotation:
         4. @Inherited
         5. @Repeatable
 
-## Preddefined Used on Java Code
+# Predefined Annotation used on Java Code
 
-### 1.  @Deprecated
+### 1. @Deprecated
 
 ```java
 public class Mobile {
@@ -146,7 +146,7 @@ public interface Bird {
         
     }
 
-    @Target({ElementType.CONSTRUCTOR, ElementType.METHOD}) // Restricting this Annotaion on Constructors & Methods.
+    @Target({ElementType.CONSTRUCTOR, ElementType.METHOD}) // Restricting this Annotation on Constructors & Methods.
     public @interface SafeVarargs {
 
     }
@@ -154,7 +154,7 @@ public interface Bird {
 
 #### ElementType Enum
 
-ElementType is an enum used with @Target to define the kinds of program elements the annotation can be applied to. The key constants are:
+ElementType is an enum used with `@Target` to define the kinds of program elements the annotation can be applied to. The key constants are:
 
 | ElementType       |Usage                                                                  |
 |-------------------|-----------------------------------------------------------------------|
@@ -171,7 +171,7 @@ ElementType is an enum used with @Target to define the kinds of program elements
 
 ## 2. @Retention
 
-- meta-annotation used to specify how long annotations with the annotated type are to be retained.
+- meta annotation used to specify how long annotations with the annotated type are to be retained.
 - It determines the visibility and lifecycle of an annotation, specifying whether it is available only at the source code level, in the compiled class files, or at runtime.
 
 #### RetentionPolicy Enum
@@ -217,11 +217,11 @@ we can use reflecton to access RuntimeLevelAnnotation
 
 ```java
 @RuntimeLevelAnnotation
-public class Example {
+public class ExampleClass {
 
 }
 
-RuntimeLevelAnnotation annotation = Example.class.getAnnotation(RuntimeLevelAnnotation.class);
+RuntimeLevelAnnotation annotation = ExampleClass.class.getAnnotation(RuntimeLevelAnnotation.class);
 if (annotation != null) {
     System.out.println("Annotation is available at runtime.");
 }
@@ -270,3 +270,89 @@ public class TestInherited {
 ## 5. @Repeatable
 
 - Allows you to apply the same annotation more than once to a single element (such as a class, method, or field).
+
+```java
+@Repeatable(Categories.class)
+public @interface Category {
+    String name();
+}
+
+// Container Class
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Categories {
+    Category[] value();
+}
+```
+
+```java
+@Category(name = "Bird")
+@Category(name = "LivingThing")
+@Category(name = "Carnivorous")
+public class Eagle{
+    public void fly() {
+    }
+}
+```
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Category[] categoryAnnotations = new Eagle().getClass().getAnnotationsByType(Category.class);
+        for(Category annotation: categoryAnnotations){
+            System.out.println(annotation.name()); // Bird, LivingThing, Carnivorous
+        }
+    }
+}
+```
+
+# Custom Annotation
+
+- We can create our own Annotation using `@interface`
+
+```java
+public @interface MyCustomAnnotation {
+
+}
+
+@MyCustomAnnotation
+public class Eagle{
+    public void fly() {
+
+    }
+}
+```
+
+#### Creating annotation with Method(Annotation member) - its more like a field
+
+- No parameter, No body
+- Return type is restricted to Primitive, Class, String, enums, annotations and array of these types.
+
+```java
+public @interface MyCustomAnnotation {
+    String name();
+}
+
+@MyCustomAnnotation(name = "testing")
+public class Eagle{
+    public void fly() {
+
+    }
+}
+```
+
+#### Creating an Annotation with an element with Default values
+
+- Default value can not be null
+
+```java
+public @interface MyCustomAnnotation {
+    String name() default "hello";
+}
+
+@MyCustomAnnotation
+public class Eagle{
+    public void fly() {
+
+    }
+}
+```
